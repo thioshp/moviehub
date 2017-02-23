@@ -1,5 +1,6 @@
 import sys
 import requests
+from collections import OrderedDict
 from pprint import pprint
 
 def getChoice(numbers, choices, prompt='\nEnter choice: ', error='Invalid choice.'):
@@ -79,14 +80,22 @@ def centerAlignString(text, width):
 	centeredLines = list(map(lambda line: line.center(width), lines))
 	return '\n'.join(centeredLines)
 
+def leftPadString(text, padding):
+	''' Return a string left-padded with the given padding '''
+	lines = text.split('\n')
+	paddedLines = (map(lambda line: ' '*padding + line, lines))
+	return '\n'.join(paddedLines)
+
 def main():
 
-	PROGRAM_WIDTH = 50 # Width of program
+	PROGRAM_WIDTH = 80 # Width of program
 	API_URL = 'http://www.omdbapi.com/' # Open Movie Database API
 	ROTTEN_TOMATOES = True # Show rotten tomatoes information
 	FULL_PLOT = True # Show full plot
 
+	printDivider(PROGRAM_WIDTH)
 	print()
+	print(centerAlignString('='*21, PROGRAM_WIDTH))
 	print(centerAlignString('OPEN MOVIE DATABASE', PROGRAM_WIDTH))
 	print(centerAlignString('='*21, PROGRAM_WIDTH))
 	print()
@@ -114,36 +123,43 @@ def main():
 		if r.status_code == 200:
 			res = r.json()
 			if res['Response'] == 'True':
-				# Basic information
-				title = res['Title']
-				released = res['Released']
-				year = res['Year']
-				genre = res['Genre']
-				plot = res['Plot']
-				director = res['Director']
-				writer = res['Writer']
-				actors = res['Actors']
-				production = res['Production']
-
-				# Extra information
-				language = res['Language']
-				rated = res['Rated']
-				runtime = res['Runtime']
-				awards = res['Awards']
-
-				# Rotten Tomatoes information
-				consensus = res['tomatoConsensus']
-				percent = res['tomatoFresh']
-				fresh = res['tomatoImage']
-				rating = res['tomatoRating']
-				url = res['tomatoURL']
+				basicInfo = OrderedDict([
+					('title', res['Title']),
+					('year', res['Year']),
+					('release date', res['Released']),
+					('plot', res['Plot']),
+					('director', res['Director']),
+					('actors', res['Actors']),
+					('writer', res['Writer']),
+					('production', res['Production'])
+				])		
+				extraInfo = OrderedDict([
+					('language', res['Language']),
+					('genre', res['Genre']),
+					('rated', res['Rated']),
+					('runtime', res['Runtime']),
+					('awards', res['Awards'])
+				])			
+				rottenTomatoesInfo = OrderedDict([
+					('consensus', res['tomatoConsensus']),
+					('percent', res['tomatoFresh']),
+					('fresh', res['tomatoImage']),
+					('rating', res['tomatoRating']),
+					('url', res['tomatoURL'])
+				])
 				
 				# Display information
+				heading = '\n%s (%s)' % (basicInfo['title'], basicInfo['year'])
+				print(heading)
+				print('-'*len(heading))
 				print()
-				header = '%s (%s)' % (title, year)
-				print(header)
-				print('-'*len(header))
-				print()
+				for info in basicInfo.keys():
+					if info == 'title' or info == 'year':
+						continue
+					print(info.upper())
+					print()
+					print(leftPadString(leftAlignString(basicInfo[info], PROGRAM_WIDTH-3), 3))
+					print()
 
 			else:
 				print()
