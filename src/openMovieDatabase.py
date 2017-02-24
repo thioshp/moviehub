@@ -28,11 +28,12 @@ def main():
 
 		# Send request
 		payload = {'tomatoes': 'true' if ROTTEN_TOMATOES else 'false', 'plot': 'full' if FULL_PLOT else 'short'}
-		print()
 		if choice == 0:
+			print()
 			printHeader(options[choice], newLineBelow=False)
 			payload['t'] = getQuery()
 		elif choice == 1:
+			print()
 			printHeader(options[choice], newLineBelow=False)
 			payload['s'] = getQuery()
 		else:
@@ -88,10 +89,13 @@ def main():
 					print(leftPad(leftAlign(basicInfo[info], PROGRAM_WIDTH-3), 3))
 					input()
 
-				printDivider(PROGRAM_WIDTH)
 			else:
 				print()
+				printHeader('Error')
 				print(res['Error'])
+				print()
+
+			printDivider(PROGRAM_WIDTH, newLineAbove=False)
 		else:
 			print('Something went wrong: Error %s.' % r.status_code)
 			printDivider(PROGRAM_WIDTH)
