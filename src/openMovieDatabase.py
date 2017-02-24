@@ -6,6 +6,7 @@ from pprint import pprint
 
 def main():
 
+	PROGRAM_NAME = 'OPEN MOVIE DATABASE'
 	PROGRAM_WIDTH = 80 # Width of program
 	API_URL = 'http://www.omdbapi.com/' # Open Movie Database API
 	ROTTEN_TOMATOES = True # Show rotten tomatoes information
@@ -13,32 +14,42 @@ def main():
 
 	printDivider(PROGRAM_WIDTH)
 	print()
-	print(centerAlignString('='*21, PROGRAM_WIDTH))
-	print(centerAlignString('OPEN MOVIE DATABASE', PROGRAM_WIDTH))
-	print(centerAlignString('='*21, PROGRAM_WIDTH))
+	printTitle(PROGRAM_NAME, PROGRAM_WIDTH)
 	print()
+	print(centerAlign('~ Powered by OMDb API ~', PROGRAM_WIDTH))
+	print(centerAlign(API_URL[7:-1], PROGRAM_WIDTH))
 
 	while True:
-		choice = getChoice([0, 1, 2], ['Instant', 'Search', 'Exit'])
+		print()
+		printHeader('Home Menu')
+		options = ['Instant', 'Search', 'Exit']
+		choice = getChoice([0, 1, 2], options)
 		printDivider(PROGRAM_WIDTH)
 
 		# Send request
 		payload = {'tomatoes': 'true' if ROTTEN_TOMATOES else 'false', 'plot': 'full' if FULL_PLOT else 'short'}
+		print()
 		if choice == 0:
+			printHeader(options[choice], newLineBelow=False)
 			payload['t'] = getQuery()
 		elif choice == 1:
+			printHeader(options[choice], newLineBelow=False)
 			payload['s'] = getQuery()
 		else:
 			exit(0)
-		try:
-			r = requests.get('http://www.omdbapi.com/', params=payload)
-		except requests.exceptions.ConnectionError:
-			print('Cannot establish connection to database.')
-			exit(1)
-		printDivider(PROGRAM_WIDTH)
+		while True:
+			print('\nSending query to database...')
+			try:
+				r = requests.get(API_URL, params=payload)
+				break
+			except requests.exceptions.ConnectionError:
+				print('Cannot establish connection to database.')
+				input('Hit Enter to retry.')
 
 		# Parse response
 		if r.status_code == 200:
+			print('Receiving information from database...')
+			printDivider(PROGRAM_WIDTH)
 			res = r.json()
 			if res['Response'] == 'True':
 				basicInfo = OrderedDict([
@@ -67,18 +78,17 @@ def main():
 				])
 				
 				# Display information
-				heading = '\n%s (%s)' % (basicInfo['title'], basicInfo['year'])
-				print(heading)
-				print('-'*len(heading))
 				print()
+				printHeader('%s (%s)' % (basicInfo['title'], basicInfo['year']))
 				for info in basicInfo.keys():
 					if info == 'title' or info == 'year':
 						continue
 					print(info.upper())
 					print()
-					print(leftPadString(leftAlignString(basicInfo[info], PROGRAM_WIDTH-3), 3))
-					print()
+					print(leftPad(leftAlign(basicInfo[info], PROGRAM_WIDTH-3), 3))
+					input()
 
+				printDivider(PROGRAM_WIDTH)
 			else:
 				print()
 				print(res['Error'])
