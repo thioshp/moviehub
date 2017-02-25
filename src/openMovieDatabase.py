@@ -1,6 +1,8 @@
+import re
 import requests
 from sys import exit
 from console import *
+from bs4 import BeautifulSoup
 from collections import OrderedDict
 from pprint import pprint
 
@@ -27,18 +29,26 @@ def main():
 		choice = getChoice([0, 1, 2], options)
 		printDivider(PROGRAM_WIDTH)
 
-		# Send request
+		# Prepare request
 		payload = {'tomatoes': 'true' if ROTTEN_TOMATOES else 'false', 'plot': 'full' if FULL_PLOT else 'short'}
-		if choice == 0:
+		if choice == 0 or choice == 1:
 			print()
 			printHeader(options[choice], newLineBelow=False)
-			payload['t'] = getQuery()
-		elif choice == 1:
-			print()
-			printHeader(options[choice], newLineBelow=False)
-			payload['s'] = getQuery()
+			query = getQuery()
+			correctedQuery = autocorrect(query)
+			# Suggest corrected query
+			if query != correctedQuery:
+				response = getYesOrNo('\nDid you mean %s? (Y/N) ' % correctedQuery.upper())
+				if response == 'N':
+					correctedQuery = query
+			if choice == 0:
+				payload['t'] = correctedQuery
+			else:
+				payload['s'] = correctedQuery
 		else:
 			exit(0)
+
+		# Send request
 		while True:
 			print('\nSending query to database...')
 			try:
@@ -118,6 +128,19 @@ def main():
 			print('Something went wrong: Error %s.' % r.status_code)
 			printDivider(PROGRAM_WIDTH)
 			exit(1)
+
+def autocorrect(phrase):
+	''' Return a string of suggested spelling for the phrase provided '''
+	googleSearchURL = 'http://www.google.com/search'
+	payload = {'q': phrase.strip()}
+	r = requests.get(googleSearchURL, params=payload)
+	soup = BeautifulSoup(r.text, 'html.parser')
+	element = soup.find('a', attrs={'class': 'spell'})
+	if element is not None:
+		correctedPhrase = re.sub('<.*?>', '', str(element))
+		return correctedPhrase
+	else:
+		return phrase
 
 if __name__ == '__main__':
 	main()

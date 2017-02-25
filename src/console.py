@@ -1,4 +1,4 @@
-# Console is a module that provides common console operations
+# console is a module that provides common console operations
 
 # PROMPTS
 def getChoice(numbers, choices, prompt='\nEnter choice: ', error='Invalid choice.'):
@@ -31,6 +31,18 @@ def getQuery(prompt='\nEnter query: ', error='Invalid query.'):
 		query = input(prompt)
 		if query != '':
 			return query
+		else:
+			print(error)
+
+def getYesOrNo(prompt='\nEnter response (Y/N) ', error='Invalid response.'):
+	'''
+	Prompt user for yes or no
+	Return a string of either 'Y' or 'N'
+	'''
+	while True:
+		response = getQuery(prompt, error)
+		if response.upper() in 'Y N'.split():
+			return response.upper()
 		else:
 			print(error)
 
