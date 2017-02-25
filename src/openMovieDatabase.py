@@ -133,7 +133,12 @@ def autocorrect(phrase):
 	''' Return a string of suggested spelling for the phrase provided '''
 	googleSearchURL = 'http://www.google.com/search'
 	payload = {'q': phrase.strip()}
-	r = requests.get(googleSearchURL, params=payload)
+	try:
+		r = requests.get(googleSearchURL, params=payload)
+		if r.status_code != 200:
+			return phrase
+	except requests.exceptions.ConnectionError:
+		return phrase
 	soup = BeautifulSoup(r.text, 'html.parser')
 	element = soup.find('a', attrs={'class': 'spell'})
 	if element is not None:
