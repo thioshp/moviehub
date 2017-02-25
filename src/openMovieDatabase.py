@@ -9,9 +9,10 @@ def main():
 	PROGRAM_NAME = 'OPEN MOVIE DATABASE'
 	PROGRAM_WIDTH = 80 # Width of program
 	API_URL = 'http://www.omdbapi.com/' # Open Movie Database API
-	ROTTEN_TOMATOES = True # Show rotten tomatoes information
-	FULL_PLOT = True # Show full plot
-
+	FULL_PLOT = False # Display full plot in basic information
+	ROTTEN_TOMATOES = True # Display rotten tomatoes information
+	EXTRA_INFO = True # Display extra information
+	
 	printDivider(PROGRAM_WIDTH)
 	print()
 	printTitle(PROGRAM_NAME, PROGRAM_WIDTH)
@@ -44,50 +45,66 @@ def main():
 				r = requests.get(API_URL, params=payload)
 				break
 			except requests.exceptions.ConnectionError:
-				print('Cannot establish connection to database.')
-				input('Hit Enter to retry.')
+				print('Cannot establish connection to database.\n')
+				hitEnter('retry')
 
 		# Parse response
 		if r.status_code == 200:
 			print('Receiving information from database...')
 			printDivider(PROGRAM_WIDTH)
 			res = r.json()
+
+			# Only allow movies
+			if 'Type' in res.keys() and res['Type'] != 'movie':
+				res['Response'] = 'False'
+				res['Error'] = 'Only movies are allowed!'
+
 			if res['Response'] == 'True':
-				basicInfo = OrderedDict([
-					('title', res['Title']),
-					('year', res['Year']),
-					('release date', res['Released']),
-					('plot', res['Plot']),
-					('director', res['Director']),
-					('actors', res['Actors']),
-					('writer', res['Writer']),
-					('production', res['Production'])
-				])		
-				extraInfo = OrderedDict([
-					('language', res['Language']),
-					('genre', res['Genre']),
-					('rated', res['Rated']),
-					('runtime', res['Runtime']),
-					('awards', res['Awards'])
-				])			
-				rottenTomatoesInfo = OrderedDict([
-					('consensus', res['tomatoConsensus']),
-					('percent', res['tomatoFresh']),
-					('fresh', res['tomatoImage']),
-					('rating', res['tomatoRating']),
-					('url', res['tomatoURL'])
-				])
-				
+				title = res['Title']
+				year = res['Year']
+				information = [
+					# Basic information
+					OrderedDict([
+						('plot', res['Plot']),
+						('director', res['Director']),
+						('writer', res['Writer']),
+						('actors', res['Actors'])
+					])
+				]
+				if ROTTEN_TOMATOES:
+					information.append(
+						# Rotten Tomatoes information
+						OrderedDict([
+							('consensus', res['tomatoConsensus']),
+							('tomatometer', res['tomatoMeter'] + '%'),
+							('average rating', res['tomatoRating'] + '/10'),
+							('url', res['tomatoURL'])
+						])
+					)
+				if EXTRA_INFO:
+					information.append(
+						# Extra information	
+						OrderedDict([
+							('genre', res['Genre']),	
+							('rated', res['Rated']),
+							('runtime', res['Runtime']),
+							('release date', res['Released'])
+						])
+					)
+
 				# Display information
 				print()
-				printHeader('%s (%s)' % (basicInfo['title'], basicInfo['year']))
-				for info in basicInfo.keys():
-					if info == 'title' or info == 'year':
-						continue
-					print(info.upper())
+				printHeader('%s (%s)' % (title, year))
+				for info in information:
+					for key in info.keys():
+						print(key.upper() + '\n')
+						detail = info[key]
+						if 'N/A' in detail:
+							detail = '-'
+						print(leftPad(leftAlign(detail, PROGRAM_WIDTH-3), 3))
+						print()
+					hitEnter()
 					print()
-					print(leftPad(leftAlign(basicInfo[info], PROGRAM_WIDTH-3), 3))
-					input()
 
 			else:
 				print()
@@ -96,10 +113,11 @@ def main():
 				print()
 
 			printDivider(PROGRAM_WIDTH, newLineAbove=False)
+
 		else:
 			print('Something went wrong: Error %s.' % r.status_code)
 			printDivider(PROGRAM_WIDTH)
 			exit(1)
 
 if __name__ == '__main__':
-  main()
+	main()

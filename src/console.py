@@ -34,6 +34,10 @@ def getQuery(prompt='\nEnter query: ', error='Invalid query.'):
 		else:
 			print(error)
 
+def hitEnter(action='continue'):
+	''' Prompt user to hit enter '''
+	input('[Hit enter to %s]' % action)
+
 # STRING ADJUSTMENT
 def leftAlign(text, width):
 	''' Return a string left-aligned within the given width '''
