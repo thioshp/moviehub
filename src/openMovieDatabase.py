@@ -24,8 +24,8 @@ def main():
 	while True:
 		print()
 		printHeader('Home Menu')
-		options = ['Quick Hit', 'Search', 'Exit']
-		choice = getChoice([0, 1, 2], options)
+		options = ['Quick Hit', 'Search', 'About', 'Exit']
+		choice = getChoice([0, 1, 2, 3], options)
 		printDivider(PROGRAM_WIDTH)
 
 		# Prepare request
@@ -48,6 +48,15 @@ def main():
 				searching = False
 			else:
 				searching = True
+		elif choice == 2:
+			# Display about information
+			print()
+			printHeader('About')
+			print('Author: Marcus Mu')
+			print('Email: chunkhang@gmail.com')
+			print('Last Updated: 2017-02-25')
+			printDivider(PROGRAM_WIDTH)
+			continue
 		else:
 			exit(0)
 
