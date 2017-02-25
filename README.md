@@ -17,7 +17,7 @@ Python 3 is required to run the program. Click [here](http://www.diveintopython3
 ### Requests
 Get the latest version of [Requests](http://docs.python-requests.org/en/master/user/install/#install). 
 ### Beautiful Soup 4
-Get the latest version of [Beautiful Soup 4](http://docs.python-requests.org/en/master/user/install/#install).
+Get the latest version of [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup).
 
 ## Installation
 Type this into the console or terminal:
