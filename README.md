@@ -9,48 +9,33 @@ This console application is only made possible thanks to [OMDb API](http://www.o
 ![quick_hit](https://cloud.githubusercontent.com/assets/12708862/23411594/b981aa26-fe0d-11e6-9e0d-fe9b8815e1a6.jpg)
 ![search](https://cloud.githubusercontent.com/assets/12708862/23411601/be1f6078-fe0d-11e6-91af-586d6a58a29c.jpg)
 
-## Requirements
-### Git
-Git is required to download the program and fetch future updates. Click [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to learn how to install Git.
-### Python 3
-Python 3 is required to run the program. Click [here](http://www.diveintopython3.net/installing-python.html) to learn how to install Python 3.
-### Requests
-Get the latest version of [Requests](http://docs.python-requests.org/en/master/user/install/#install). 
-### Beautiful Soup 4
-Get the latest version of [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup).
+## Note
+Movie Hub only works with [Python 3](http://www.diveintopython3.net/installing-python.html).
 
 ## Installation
-Type this into the console or terminal:
+Install Movie Hub using [pip](https://pip.pypa.io/en/stable/quickstart/):
 ```sh
-$ cd Desktop
-$ git clone https://github.com/chunkhang/open-movie-database
+$ pip install moviehub
 ```
 
 ## Usage
-Feel free to move the **open-movie-database** folder anywhere, but do leave the contents intact. 
-### Windows
-Windows users can either use the console to run the program, or simply double-click the **openMovieDatabase.py** file. Create a shortcut to make the process easier. 
+Simply type the following into the console:
 ```sh
-$ open-movie-database\src\openMovieDatabase.py
-```
-### Mac
-Mac users need to employ the terminal to run the program. Create an [alias](http://www.hostingadvice.com/how-to/set-command-aliases-linuxubuntudebian/) to make life simpler.
-```sh
-$ python3 open-movie-database/src/openMovieDatabase.py
+$ moviehub
 ```
 
 ## Updates
-To ensure that you are using the latest version, check the changelog to see whether the date matches your program's last-updated date. To update your program, fetch the changes from GitHub:
+To get the latest features, make sure you upgrade to the latest version from time to time using pip:
 ```sh
-$ cd open-movie-database
-$ git pull
+$ pip install --upgrade moviehub
 ```
 
-## Changelog
+## Versions
 
-### 2017-02-25
-* Started changelog 
+### 1.0.0
+* Initial release
 
 ## Contact
 Contact me to report bugs or suggest features: <br />
-**Marcus Mu** chunkhang@gmail.com
+[Marcus Mu](http://marcusmu.me) <br />
+chunkhang@gmail.com
