@@ -22,5 +22,10 @@ setup(
 		'Intended Audience :: End Users/Desktop',
 		'Programming Language :: Python :: 3 :: Only',
 		'Environment :: Console'
+	],
+	entry_points = [
+		'console_scripts': [
+			'moviehub=moviehub.moviehub:main'
+		]
 	]
 )
