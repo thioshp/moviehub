@@ -12,7 +12,7 @@ setup(
 	author = 'Marcus Mu',
 	author_email = 'chunkhang@gmail.com',
 	url = 'https://github.com/chunkhang/moviehub',
-	download_url = '', 
+	download_url = 'https://github.com/chunkhang/moviehub/archive/1.0.0.tar.gz', 
 	keywords = [
 		'movie', 
 		'hub', 
