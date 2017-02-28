@@ -11,9 +11,8 @@ setup(
 	description = 'A console application for obtaining movie information using OMDb API',
 	author = 'Marcus Mu',
 	author_email = 'chunkhang@gmail.com',
-	license = 'LICENSE.txt',
+	license = 'UNLICENSE',
 	url = 'https://github.com/chunkhang/moviehub',
-	download_url = 'https://github.com/chunkhang/moviehub/archive/1.0.0.tar.gz', 
 	keywords = [
 		'movie', 
 		'hub', 
