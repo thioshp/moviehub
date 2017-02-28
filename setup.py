@@ -7,7 +7,7 @@ setup(
 		'beautifulsoup4', 
 		'requests'
 	],
-	version = '1.0.0',
+	version = '1.0.1',
 	description = 'A console application for obtaining movie information using OMDb API',
 	author = 'Marcus Mu',
 	author_email = 'chunkhang@gmail.com',

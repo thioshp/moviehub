@@ -1,7 +1,7 @@
 import re
 import requests
 from sys import exit
-from console import *
+from moviehub.console import *
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 
