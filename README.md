@@ -4,10 +4,8 @@ As a frequent movie-goer, I need to quickly look up information on movies, espec
 ## Powered by OMDb API
 This console application is only made possible thanks to [OMDb API](http://www.omdbapi.com). I recommend you check out Brian Fritz's website and consider supporting his work to ensure that the free web service remains sustainable.
 
-## Screenshots
-![autocorrection](https://cloud.githubusercontent.com/assets/12708862/23411590/b3e3b08c-fe0d-11e6-8fd8-0f00a8dba484.jpg)
-![quick_hit](https://cloud.githubusercontent.com/assets/12708862/23411594/b981aa26-fe0d-11e6-9e0d-fe9b8815e1a6.jpg)
-![search](https://cloud.githubusercontent.com/assets/12708862/23411601/be1f6078-fe0d-11e6-91af-586d6a58a29c.jpg)
+## Screenshot
+![Movie Hub](https://cloud.githubusercontent.com/assets/12708862/23473090/f844e6ce-fee9-11e6-8244-feb55d6851d8.jpg)
 
 ## Note
 Movie Hub only works with [Python 3](http://www.diveintopython3.net/installing-python.html).
@@ -31,6 +29,10 @@ $ pip install --upgrade moviehub
 ```
 
 ## Versions
+
+### 1.0.1
+* Title is now Movie Hub
+* About has been updated
 
 ### 1.0.0
 * Initial release
