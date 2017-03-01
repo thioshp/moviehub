@@ -28,7 +28,7 @@ To get the latest features, make sure you upgrade to the latest version from tim
 $ pip install --upgrade moviehub
 ```
 
-## Versions
+## Releases
 
 ### 1.0.1
 * Title is now Movie Hub
