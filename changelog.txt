@@ -1,0 +1,22 @@
+Create Source Distribution:
+python3 setup.py sdist
+
+Build Python Wheel:
+python3 setup.py bdist_wheel
+
+Upload to PyPI:
+twine upload [-r testpypi] <dist/package.whl>
+
+------------------------------------------------------
+
+Latest Public Release:
+1.0.0
+
+Next Public Release:
+1.0.1
+
+------------------------------------------------------
+
+1.0.0.1
+- Modified about
+- Renamed titled
