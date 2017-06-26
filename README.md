@@ -1,5 +1,9 @@
-# Movie Hub
+# Movie Hub 
 As a frequent movie-goer, I need to quickly look up information on movies, especially critic reviews from [Rotten Tomatoes](https://www.rottentomatoes.com). I find it much more convenient to do it on the console rather than wasting time navigating through the browser just to find a few details about a movie.
+
+## DISCONTINUED
+
+**OMDb has made their API keys private. Therefore, I will no longer be working on this.**
 
 ## Powered by OMDb API
 This console application is only made possible thanks to [OMDb API](http://www.omdbapi.com). I recommend you check out Brian Fritz's website and consider supporting his work to ensure that the free web service remains sustainable.
