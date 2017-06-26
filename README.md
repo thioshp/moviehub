@@ -3,7 +3,7 @@ As a frequent movie-goer, I need to quickly look up information on movies, espec
 
 ## DISCONTINUED
 
-**OMDb has made their API keys private. Therefore, I will no longer be working on this.**
+**OMDb has made their API keys private. Therefore, I will no longer be working on this. Farewell.**
 
 ## Powered by OMDb API
 This console application is only made possible thanks to [OMDb API](http://www.omdbapi.com). I recommend you check out Brian Fritz's website and consider supporting his work to ensure that the free web service remains sustainable.
