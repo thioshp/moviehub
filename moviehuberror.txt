@@ -1,0 +1,5 @@
+# moviehub Error Message
+moviehub gives the error below:
+
+>Sending query to database....
+>Something went wrong: Error 401.
